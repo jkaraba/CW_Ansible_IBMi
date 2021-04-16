@@ -1,0 +1,43 @@
+---
+- name: Create user profile on IBM i
+  hosts: all
+  gather_facts: no
+
+  vars:
+    users:
+      - name: 'GEORGE'
+        pwd: 'passw0rd'
+        special_auth: 
+          - '*JOBCTL'
+          - '*SAVSYS'
+      - name: 'JANE'
+        pwd: 'passw0rd'
+        special_auth: 
+          - '*JOBCTL'
+          - '*SERVICE'
+      - name: 'JOHN'
+        pwd: 'passw0rd'
+        special_auth: 
+          - '*SPLCTL'
+  tasks:
+
+    - name: create user profile
+      ibm.power_ibmi.ibmi_user_and_group:
+        operation: 'create'
+        user: "{{ item.name }}"
+        password: "{{ item.pwd }}"
+        status: '*ENABLED'
+        special_authority: "{{ item.special_auth }}"
+        text: "Created by Ansible"
+      loop: "{{ users }}"
+      register: user_change
+      ignore_errors: false
+
+   # - name: Display results 
+   #   debug:
+   #     msg: "{{ item.stdout | to_nice_json }}"
+   #   loop: "{{ user_change.results }}"
+   #   loop_control:
+   #     label: "{{ item }}" 
+   
+

@@ -1,0 +1,29 @@
+---
+- name: Display user profiles   
+  hosts: all
+  gather_facts: no
+
+  tasks:
+
+  - name: Prompt for user name if not yet defined  
+    block:
+    - pause:
+        prompt: "Enter User Name"
+      register: entered
+    - set_fact:
+        user_name: "{{ entered.user_input }}"
+    when: user_name is undefined
+
+  - name: Query list of users 
+    command: "system 'DLTUSRPRF USRPRF({{ user_name }})'"
+    register: user_profile
+    changed_when: false
+ 
+  - name: "Display profile for {{ user_name }}"
+    debug:
+      msg: "{{ user_profile.stdout }}"
+
+
+ 
+
+

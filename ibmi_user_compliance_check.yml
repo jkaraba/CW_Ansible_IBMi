@@ -1,0 +1,24 @@
+---
+- name: user profile compliance check
+  hosts: all
+  gather_facts: no
+
+  vars:
+    users: ['GEORGE', 'JANE', 'JOHN']
+    check_for: 
+      - {'name':'status', 'expect':['*enabled']}
+      - {'name':'NO_PASSWORD_INDICATOR', 'expect':['no']}
+      - {'name':'SPECIAL_AUTHORITIES', 'expect': ['*JOBCTL','*SAVSYS', '*SPLCTL']}
+
+  tasks:
+    - name: Do user profile compliance check
+      ibm.power_ibmi.ibmi_user_compliance_check:
+        joblog: true
+        users: "{{ users }}"    
+        fields: "{{ check_for }}"
+      register: comp_check
+
+    - name: Display results 
+      debug:
+        msg: "{{ comp_check.result_set }}"
+

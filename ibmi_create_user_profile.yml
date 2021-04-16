@@ -1,0 +1,50 @@
+---
+- name: Create user profile on IBM i
+  hosts: all
+  gather_facts: no
+
+  vars:
+    users:
+       - {name: 'JOHN', pwd: 'passw0rd', auth: '*ALL'}
+       - {name: 'JANE', pwd: 'passw0rd', auth: '*ALL'}
+
+  tasks:
+
+  - name: check for users 
+    command: "system 'DSPUSRPRF USRPRF({{ item.name }})'"
+    register: user_check
+    changed_when: false
+    loop: "{{ users }}"
+    loop_control:
+      label: "{{ item.name }}"
+    ignore_errors: yes
+
+  - name: Create user profiles with specific auth (if user not already present) 
+    command: "system 'CRTUSRPRF USRPRF({{ item.name }}) PASSWORD({{ item.pwd }}) AUT({{item.auth}})'"
+    loop: "{{ users }}"
+    loop_control:
+      index_var: user_index
+      label: "{{ item.name }}" 
+    when: user_check.results[user_index].rc !=0    
+    ignore_errors: yes
+#    no_log: true
+
+  - name: Query list of users 
+    command: "system 'DSPUSRPRF USRPRF({{ item.name }})'"
+    register: user_check
+    changed_when: false
+    loop: "{{ users }}"
+    loop_control:
+      label: "{{ item.name }}"
+ 
+  - name: Display profiles for new users
+    debug:
+      msg: "{{ item.stdout }}"
+    loop: "{{ user_check.results }}"
+    loop_control:
+      label: "{{ item.item.name }}"
+
+
+ 
+
+
