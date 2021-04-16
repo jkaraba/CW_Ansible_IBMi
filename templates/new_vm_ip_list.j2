@@ -1,0 +1,6 @@
+{% for group_label in groups if group_label =='New_VMs' %}
+[{{ group_label }}]
+{% for host_name in groups[group_label] %}
+{{ host_name }}
+{% endfor %}
+{% endfor %}
