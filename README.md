@@ -1,2 +1,4 @@
 # CW_Ansible_IBMi
-Repository used for Cloud Workshop
+
+Temporary repository used for Cloud Workshop. 
+Please fork to your own ID and use that version during the worksop
