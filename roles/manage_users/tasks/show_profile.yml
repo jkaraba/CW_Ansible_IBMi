@@ -12,4 +12,4 @@
     msg: "{{ item.result_set }}"
   loop: "{{ user_profile.results }}"
   loop_control:
-    label: " {{ item.results.item.name }} "
+    label: " {{ item.item.name }} "
