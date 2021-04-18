@@ -3,3 +3,7 @@
 
 ptf_action: check
 repo_server: '{{ inventory_hostname }}'
+ptfs_list_parm: "{{ ptfs_list }}"
+product: '*ONLY'
+ptf: 'SI59140'
+release: '*ALL'
