@@ -3,7 +3,7 @@
   ibm.power_ibmi.ibmi_user_compliance_check:
     joblog: true
     users: "{{ users }}"    
-    fields: "{{ check_for }}"
+    fields: "{{ check_list }}"
   register: comp_check
 
 - name: Display results 
