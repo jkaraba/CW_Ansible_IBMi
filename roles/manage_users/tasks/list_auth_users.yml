@@ -10,7 +10,7 @@
     msg: "{{ auth_users.stdout.split('\n') }}"
 
 - name: List authorized users 
-  ibmi_cl_command:
+  ibm.power_ibmi.ibmi_cl_command:
     cmd: 'DSPAUTUSR'
   register: auth_user
 
