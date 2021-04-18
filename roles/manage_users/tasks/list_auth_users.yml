@@ -1,20 +1,10 @@
 --- 
-
-- name: Query list of authorized users 
-  command: 'system "DSPAUTUSR"'
-  register: auth_users
-  changed_when: false
-
-- name: Display profiles for new users
-  debug:
-    msg: "{{ auth_users.stdout.split('\n') }}"
-
-- name: List authorized users 
+- name: get list of authorized users 
   ibm.power_ibmi.ibmi_cl_command:
     cmd: 'DSPAUTUSR'
   register: auth_user
 
-- name: Display profiles for new users
+- name: display authorized users
   debug:
     msg: "{{ auth_users.stdout }}"
 

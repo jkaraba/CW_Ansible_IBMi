@@ -1,2 +1,19 @@
 ---
 # vars file for manage_users
+users: 
+  - QSECOFR
+  - QCIUSER
+  - QSYSOPR
+
+check_list: 
+  - "name": "status"
+    'expect':
+       - '*enabled'
+  - "name": "NO_PASSWORD_INDICATOR"
+    "expect":
+       - 'no'
+  -  "name": "SPECIAL_AUTHORITIES"
+     "expect": 
+       - '*JOBCTL'
+       - '*SAVSYS'
+       - '*SPLCTL'
