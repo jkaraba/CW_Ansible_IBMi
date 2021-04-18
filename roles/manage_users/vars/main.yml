@@ -8,9 +8,9 @@ user_action: add
 # special_authority choices: 
 # *USRCLS, *NONE, *SAME, *ALLOBJ, *AUDIT, *JOBCTL, *SAVSYS, *IOSYSCFG, *SECADM, *SERVICE, *SPLCTL
 users:
-  - {name: ‘TEST_USER_1’, special_authority: [‘*ALLOBJ’, '*JOBCTL', '*SECADM']}
-  - {name: ‘TEST_USER_2’, special_authority: [‘*USRCLS’, '*SPLCTL', '*SAVSYS']}
-  - {name: ‘TEST_USER_3’, special_authority: ['*SPLCTL', 'IOSYSCFG']}
+  - {name: ‘TESTUSER_1’, special_authority: [‘*ALLOBJ’, '*JOBCTL', '*SECADM']}
+  - {name: ‘TESTUSER_2’, special_authority: [‘*USRCLS’, '*SPLCTL', '*SAVSYS']}
+  - {name: ‘TESTUSER_3’, special_authority: ['*SPLCTL', 'IOSYSCFG']}
 
 
 compliance_check_list: 
