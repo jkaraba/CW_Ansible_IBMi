@@ -1,13 +1,11 @@
 ---
-# tasks file for manage_ptfs
-
----
 - name: Check if a set of individual PTFs are already in fix management catalog, then download non-existent PTFs
   # This playbook will check if requested individual PTFs are already in catalog, if not, will call download_individual_ptfs role
   # to download non-existent ptfs and write individual PTFs' information into catalog.
 
   # Command example: ansible-playbook /check_download_individual_ptfs.yml -e "{'repo_server': 'reposerver'，'ptfs_list': ['SI67856', 'SI69375', 'SI73751']}"
-  hosts: "{{ repo_server }}"
+  # hosts: "{{ repo_server }}"
+  hosts: all
   gather_facts: false
   collections:
     - ibm.power_ibmi
