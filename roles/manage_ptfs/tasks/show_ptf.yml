@@ -4,7 +4,7 @@
   ibm.power_ibmi.ibmi_display_fix:
     product: "{{ product }}"
     ptf: "{{ ptf }}"
-    release: "{{ release }}"
+    #release: "{{ release }}"
   register: results
     
 - debug: var=results
