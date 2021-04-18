@@ -1,9 +1,12 @@
----
+--- 
+
 - name: Query list of authorized users 
-    command: "system 'DSPAUTUSR'"
+  command: 'system "DSPAUTUSR"'
   register: auth_users
   changed_when: false
-  
+
+- debug: vars=auth_users
+
 - name: Display profiles for new users
   debug:
     msg: "{{ auth_users.stdout.split('\n') }}"
