@@ -6,7 +6,7 @@
 
 - name: display authorized users
   debug:
-    msg: "{{ auth_users.stdout }}"
+    msg: "{{ auth_users.stdout.split('\n') }}"
 
  
 
