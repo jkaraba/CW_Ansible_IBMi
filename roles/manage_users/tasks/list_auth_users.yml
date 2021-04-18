@@ -1,19 +1,12 @@
 ---
-- name: Create user profile on IBM i
-  hosts: all
-  gather_facts: no
-
-
-  tasks:
-
-  - name: Query list of authorized users 
+- name: Query list of authorized users 
     command: "system 'DSPAUTUSR'"
-    register: auth_users
-    changed_when: false
+  register: auth_users
+  changed_when: false
   
-  - name: Display profiles for new users
-    debug:
-      msg: "{{ auth_users.stdout.split('\n') }}"
+- name: Display profiles for new users
+  debug:
+    msg: "{{ auth_users.stdout.split('\n') }}"
 
 
  
