@@ -9,7 +9,7 @@ user_action: add
 # *USRCLS, *NONE, *SAME, *ALLOBJ, *AUDIT, *JOBCTL, *SAVSYS, *IOSYSCFG, *SECADM, *SERVICE, *SPLCTL
 users:
   - {name: TESTUSER1, special_authority: ["*ALLOBJ", "*JOBCTL", "*SECADM"]}
-  - {name: TESTUSER2, special_authority: ["*USRCLS", "*SPLCTL", "*SAVSYS"]}
+  - {name: TESTUSER2, special_authority: ["*USRCLS"]}
   - {name: TESTUSER3, special_authority: ["*SPLCTL", "*IOSYSCFG"]}
 
 
