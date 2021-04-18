@@ -9,5 +9,5 @@
 
 - name: Show results
   debug:
-    msg: "{{ user_profile }}"
+    msg: "{{ user_profile.results.result_set }}"
       
