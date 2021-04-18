@@ -1,8 +1,14 @@
 ---
-- name: Do user profile compliance check
+- name: Load user names
+  set_fact:
+     users_to_verify: "{{ users_to_verify |default([]) + [item.name] }}"
+  loop: "{{ users }} "   
+
+
+- name: compliance check
   ibm.power_ibmi.ibmi_user_compliance_check:
     joblog: true
-    users: "{{ users }}"    
+    users: "{{ users_to_verify }}"    
     fields: "{{ compliance_check_list }}"
   register: comp_check
 
