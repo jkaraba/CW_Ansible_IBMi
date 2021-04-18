@@ -7,7 +7,3 @@
   register: user_profile
   ignore_errors: false
 
-- name: "Delete profile operation results for user: {{ user_name }}"
-  debug:
-    msg: "{{ user_profile.stdout}}"
-      
