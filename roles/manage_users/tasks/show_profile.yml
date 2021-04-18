@@ -9,7 +9,7 @@
 
 - name: display detailed profile information
   debug:
-    msg: "{{ item.result_set | to_nice_yaml }}""
+    msg: "{{ item.result_set | to_nice_yaml }}"
   loop: "{{ user_profile.results }}"
   loop_control:
     label: " {{ item }} "
