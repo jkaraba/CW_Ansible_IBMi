@@ -1,2 +1,5 @@
 ---
 # vars file for manage_ptfs
+
+ptf_action: check
+repo_server: '{{ inventory_hostname }}'

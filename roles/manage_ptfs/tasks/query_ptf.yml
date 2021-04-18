@@ -1,24 +1,10 @@
 ---
 
-- name: show PTF information
-  hosts: all
-  gather_facts: no
-  
-  collections:
-    - ibm.power_ibmi
-
-  vars:
-    product: '*ONLY'
-    ptf: ''
-    release: '*ALL'
-
-  tasks:
-
-    - name: query ptf
-      ibmi_fix:
-        operation: 'query'
-        fix_list: "*ALL"
-      register: results
+- name: query ptf
+  ibm.power_ibmi.ibmi_fix:
+    operation: 'query'
+    fix_list: "*ALL"
+  register: results
  
-    - debug:
-        msg: "{{ lookup('template', 'templates/list-ptfs.j2').split('\n') }}" 
+- debug:
+    msg: "{{ lookup('template', 'templates/list-ptfs.j2').split('\n') }}" 

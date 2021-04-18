@@ -1,24 +1,10 @@
 ---
 
-- name: show PTF information
-  hosts: all
-  gather_facts: no
-  
-  collections:
-    - ibm.power_ibmi
-
-  vars:
-    product: '*ONLY'
-    ptf: 'SI59140'
-    release: '*ALL'
-
-  tasks:
-
-    - name: Get PTF information
-      ibmi_display_fix:
-        product: "{{ product }}"
-        ptf: "{{ ptf }}"
-        release: "{{ release }}"
-      register: results
+- name: Get PTF information
+  ibm.power_ibmi.ibmi_display_fix:
+    product: "{{ product }}"
+    ptf: "{{ ptf }}"
+    release: "{{ release }}"
+  register: results
     
-    - debug: var=results
+- debug: var=results
