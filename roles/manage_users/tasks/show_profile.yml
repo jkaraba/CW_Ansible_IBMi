@@ -10,8 +10,8 @@
 - name: display detailed profile information
   debug:
     msg: |
-         Profile details for {{ idx.item.name }} -----------
-         {{ idx.result_set }}
+         Profile details for {{ item.item.name }} -----------
+         {{ item.result_set }}
   loop: "{{ user_profile.results }}"
   loop_control:
-    label: idx
+    label: " {{ item }} "
