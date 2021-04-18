@@ -7,7 +7,9 @@
   register: user_profile
   ignore_errors: false
 
-- name: Show results
-  debug:
-    msg: "{{ user_profile.results.result_set }}"
-      
+- name: display detailed profile information
+      debug:
+        msg: "{{ item.result_set }}"
+      loop: "{{ user_profile.results }}"
+      loop_control:
+        label: "{{ item }}"  
