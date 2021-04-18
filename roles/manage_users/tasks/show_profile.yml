@@ -11,7 +11,7 @@
   debug:
     msg: |
          Profile details for {{ item.item.name }} -----------
-         {{ item.result_set }}
+         {{ item.result_set | to_nice_yaml }}
   loop: "{{ user_profile.results }}"
   loop_control:
     label: " {{ item }} "
