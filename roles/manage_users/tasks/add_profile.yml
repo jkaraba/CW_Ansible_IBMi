@@ -1,0 +1,20 @@
+---
+- name: create user profile(s)
+  ibm.power_ibmi.ibmi_user_and_group:
+    operation: 'create'
+    user: "{{ item.name }}"
+    status: '*ENABLED'
+    special_authority: "{{ item.special_authority }}"
+    text: "Created by Ansible"
+  loop: "{{ users }}"
+  register: user_change
+  ignore_errors: false
+
+# - name: Display results 
+#   debug:
+#     msg: "{{ item.stdout | to_nice_json }}"
+#   loop: "{{ user_change.results }}"
+#   loop_control:
+#     label: "{{ item }}" 
+   
+

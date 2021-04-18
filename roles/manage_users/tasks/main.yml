@@ -1,9 +1,26 @@
 ---
 # tasks file for manage_users
 
-- name: perform user compliance check
-  include_tasks: user_compliance_check.yml
+- name: verify user profiles compliance 
+  include_tasks: verify_compliance.yml
+  when: user_action == "verify"
 
-- name: List authorized users
+- name: add authorized user profiles 
+  include_tasks: add_profile.yml
+  when: user_action == "add"
+
+- name: update authorized user profiles
+  include_tasks: change_profile.yml
+  when: user_action == "update"
+
+- name: delete authorized user profiles
+  include_tasks: delete_profile.yml
+  when: user_action == "delete"
+
+- name: show user profile details
+  include_tasks: show_profile.yml
+  when: user_action == "show"
+
+- name: list authorized users
   include_tasks: list_auth_users.yml
-
+  when: user_action == "list_auth"

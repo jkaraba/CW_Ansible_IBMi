@@ -1,0 +1,13 @@
+---
+- name: collect user profile information
+  ibm.power_ibmi.ibmi_user_and_group:
+    operation: 'display'
+    user: "{{ item.name }}"
+  loop: "{{ users }}"  
+  register: user_profile
+  ignore_errors: false
+
+- name: "Display profile for user: {{ user_name }}"
+  debug:
+    msg: "{{ user_profile.result_set}}"
+      

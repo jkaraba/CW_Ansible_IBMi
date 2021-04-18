@@ -2,7 +2,7 @@
 - name: get list of authorized users 
   ibm.power_ibmi.ibmi_cl_command:
     cmd: 'DSPAUTUSR'
-  register: auth_user
+  register: auth_users
 
 - name: display authorized users
   debug:

@@ -1,26 +1,13 @@
 ---
-- name: Delete user profile on IBM i
-  hosts: all
-  gather_facts: no
+- name: deleting user profile(s)
+  ibm.power_ibmi.ibmi_user_and_group:
+    operation: 'delete'
+    user: "{{ item.name }}"
+  loop: "{{ users }}"  
+  register: user_profile
+  ignore_errors: false
 
-  tasks:
-    - name: Prompt for user name if not yet defined  
-      block:
-      - pause:
-          prompt: "Enter User Name"
-        register: entered
-      - set_fact:
-          user_name: "{{ entered.user_input }}"
-      when: user_name is undefined
-
-    - name: "deleting profile for {{ user_name }}"
-      ibm.power_ibmi.ibmi_user_and_group:
-        operation: 'delete'
-        user: "{{ user_name }}"
-      register: user_profile
-      ignore_errors: false
-
-    - name: "Delete profile operation results for user: {{ user_name }}"
-      debug:
-        msg: "{{ user_profile.stdout}}"
+- name: "Delete profile operation results for user: {{ user_name }}"
+  debug:
+    msg: "{{ user_profile.stdout}}"
       
