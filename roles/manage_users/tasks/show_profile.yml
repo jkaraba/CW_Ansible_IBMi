@@ -8,8 +8,10 @@
   ignore_errors: false
 
 - name: display detailed profile information
-      debug:
-        msg: "{{ item.result_set }}"
-      loop: "{{ user_profile.results }}"
-      loop_control:
-        label: "{{ item }}"  
+  debug:
+    msg: |
+         Profile details for {{ idx.item.name }} -----------
+         {{ idx.result_set }}
+  loop: "{{ user_profile.results }}"
+  loop_control:
+    label: idx
