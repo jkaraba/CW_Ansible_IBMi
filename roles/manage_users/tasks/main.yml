@@ -1,0 +1,6 @@
+---
+# tasks file for manage_users
+
+- name: Display authorized users
+  include_tasks: list_auth_users.yml
+  

@@ -1,0 +1,15 @@
+---
+- name: Update VMs
+  hosts: all
+  gather_facts: yes
+
+  roles:
+    - role: manage_users
+      vars: 
+        users: John
+      when: ansible_system == 'OS400'
+   
+   
+   # - role: cl_commands
+   #   vars:
+   #      cmd_list:
