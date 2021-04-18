@@ -7,7 +7,8 @@
     - role: manage_ptfs
       vars: 
         ptfs_list:
-          - SI73751
-          - SI73401
+#          - SI73751
+#          - SI73401
+          - SI66718
   # Command example: ansible-playbook /check_download_individual_ptfs.yml -e "{'repo_server': 'reposerver'，'ptfs_list': ['SI67856', 'SI69375', 'SI73751']}"
  
