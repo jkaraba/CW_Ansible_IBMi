@@ -14,9 +14,9 @@ users:
 
 
 compliance_check_list: 
-  - {'name':'status', 'expect':['*enabled']}
-  - {'name':'NO_PASSWORD_INDICATOR', 'expect':['no']}
-  - {'name':'SPECIAL_AUTHORITIES', 'expect': ['*JOBCTL','*SAVSYS', '*SPLCTL']}
+  - {name: status, expect: ["*enabled"]}
+  - {name: NO_PASSWORD_INDICATOR , expect: ["no"]}
+  - {name: SPECIAL_AUTHORITIES, expect: ["*JOBCTL","*SAVSYS", "*SPLCTL"]}
 
 # Compliance Items (choices)
 #----------------------------
