@@ -20,7 +20,7 @@
 #    matching_ptfs: "{{ matching_ptfs | combine({item: { 'PTF_INFO': loaded_ptfs[idx] }}, recursive = true) }}"
 #  vars:
 
-- debug: loaded_ptfs[100]
+- debug: var=loaded_ptfs
 - debug: var=ptfs_list
 
 - debug:
