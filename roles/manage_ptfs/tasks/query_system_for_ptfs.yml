@@ -14,4 +14,4 @@
   debug:
     msg: "{{ lookup('template', 'templates/list-ptfs.j2').split('\n') }}" 
   when: 
-    - ptf_action == list
+    - ptf_action == 'list'
