@@ -26,7 +26,7 @@
   ibm.power_ibmi.ibmi_fix_repo:
     type: "single_ptf"
     action: "find"
-    parameters: "{{ ptfs_list |string }}"
+    parameters: "{{ ptfs_list }}"
     checksum: true
   register: fix_repo_find_result
   delegate_to: "{{ repo_server }}"

@@ -1,5 +1,0 @@
-- name: Create a library by using CL command CRTLIB
-  ibmi_cl_command:
-    cmd: 'CRTLIB LIB(TESTLIB)'
-    become_user: 'USER1'
-    become_user_password: 'yourpassword'
