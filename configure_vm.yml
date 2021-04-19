@@ -1,7 +1,0 @@
----
-- name: Update VMs
-  hosts: all
-  gather_facts: no
-
-  roles:
-    - role: manage_users
