@@ -8,13 +8,20 @@
 - name: Check system for PTFs  
   include_tasks: query_system_for_ptfs.yml
   
-- name: Find matching PTFs  
-  set_fact:
-     matching_ptfs: "{{ matching_ptfs | combine({item.PTF_IDENTIFIER: { 'PTF_INFO': item }}, recursive = true) }}"
-  loop: "{{ loaded_ptfs }}"
-  loop_control:
-    label: "{{ item.PTF_IDENTIFIER }}"
-  when: item.PTF_IDENTIFIER in ptfs_list   
+#- name: Find matching PTFs  
+#  set_fact:
+#     matching_ptfs: "{{ matching_ptfs | combine({item.PTF_IDENTIFIER: { 'PTF_INFO': item }}, recursive = true) }}"
+#  loop: "{{ loaded_ptfs }}"
+#  loop_control:
+#    label: "{{ item.PTF_IDENTIFIER }}"
+#  when: item.PTF_IDENTIFIER in ptfs_list   
+
+- set_fact:
+    matching_ptfs: "{{ matching_ptfs | combine({item: { 'PTF_INFO': loaded_ptfs[idx] }}, recursive = true) }}"
+  vars:
+    idx: "{{ loaded_ptfs | ansible.utils.index_of('eq', item) }}"
+  loop: "{{ ptfs_list }}"
+
 
 - name: Show details for matching PTFs  
   include_tasks: show_ptf_details.yml
