@@ -1,6 +1,6 @@
 ---
 
-- name: Get PTF information
+- name: Get details on matching PTF
   ibm.power_ibmi.ibmi_display_fix:
     product: "{{ product }}"
     ptf: "{{ ptf }}"
