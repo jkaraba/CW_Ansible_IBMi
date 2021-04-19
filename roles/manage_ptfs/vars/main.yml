@@ -1,9 +1,6 @@
 ---
 # vars file for manage_ptfs
-
-ptf_action: check
+ptf_action: list
 repo_server: '{{ inventory_hostname }}'
 ptfs_list_parm: "{{ ptfs_list }}"
-product: '*ONLY'
-ptf: 'SI59140'
-release: '*ALL'
+matching_ptf_entries: {}

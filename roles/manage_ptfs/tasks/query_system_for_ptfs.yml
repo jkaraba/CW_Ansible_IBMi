@@ -1,0 +1,17 @@
+---
+
+- name: query system for existing PTFs
+  ibm.power_ibmi.ibmi_fix:
+    operation: 'query'
+    fix_list: "*ALL"
+  register: results
+
+- name: load results into a PTF list 
+  set_fact:
+    loaded_ptfs: "{{ results.ptf_list }}" 
+
+- name: show current list of PTFs 
+  debug:
+    msg: "{{ lookup('template', 'templates/list-ptfs.j2').split('\n') }}" 
+  when: 
+    - ptf_action: list

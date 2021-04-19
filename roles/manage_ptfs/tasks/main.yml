@@ -5,9 +5,23 @@
 #    name: fix_repo_check_download_individual_ptfs
 #  ignore_errors: true
 
-- name: Check PTFS  
-  include_tasks: "{{ item }}"
-  loop:
-    - query_ptf.yml
-    - show_ptf.yml
+- name: Check system for PTFs  
+  include_tasks: query_system_for_ptfs.yml
+  
+- name: Find matching PTFs  
+  set_fact:
+     matching_ptfs: "{{ matching_ptfs | combine({item.PTF_IDENTIFIER: { 'PTF_INFO': item }}, recursive = true) }}"
+  loop: "{{ loaded_ptfs }}"
+  loop_control:
+    label: "{{ item.PTF_IDENTIFIER }}"
+  when: item.PTF_IDENTIFIER in ptfs_list   
+
+- name: Show details for matching PTFs  
+  include_tasks: show_ptf_details.yml
+  vars:
+    product: "{{ item.PTF_PRODUCT_ID }}"
+    ptf: "{{ item.PTF_IDENTIFIER }}"
+    release: "{{ PTF_PRODUCT_RELEASE_LEVEL }}" 
+  loop: "{{ matching_ptfs |dict2items }}"
+
 

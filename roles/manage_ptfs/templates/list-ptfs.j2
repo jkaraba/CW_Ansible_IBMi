@@ -5,3 +5,5 @@ List of PTFS installed on {{ ansible_host }}
 {% for item in results.ptf_list %}
 {{'%-20s %-20s %-20s %-40s' | format(item.PTF_IDENTIFIER, item.PTF_PRODUCT_ID, item.PTF_LOADED_STATUS, item.PTF_STATUS_TIMESTAMP) }}
 {% endfor %}
+
+

@@ -4,7 +4,10 @@
   ibm.power_ibmi.ibmi_display_fix:
     product: "{{ product }}"
     ptf: "{{ ptf }}"
-    #release: "{{ release }}"
+    release: "{{ release }}"
   register: results
+  ignore_errors: yes
     
-- debug: var=results
+- name: Show PTF details
+  debug: 
+    msg: "{{ results.ptf_info }}"
