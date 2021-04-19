@@ -1,5 +1,14 @@
----
 # tasks file for fix_repo_check_download_individual_ptfs
+- name: initialize list
+  set_fact:
+    list: []
+
+- name: compose list
+  set_fact:
+    list: "{{ list|default([]) + [{'ptf_id': ptfs_list_parm_var }] }}"
+  loop: "{{ ptfs_list_parm }}"
+  loop_control:
+    loop_var: ptfs_list_parm_var
 
 - name: initialize rc, check_fail_list, RecordNotFound_list, download_fail_list and download_success_list
   set_fact:
@@ -13,12 +22,10 @@
   ibm.power_ibmi.ibmi_fix_repo:
     type: "single_ptf"
     action: "find"
-    parameters: "{{ ptfs_list }}"
+    parameters: "{{ list }}"
     checksum: true
   register: fix_repo_find_result
   delegate_to: "{{ repo_server }}"
-
-- pause:
 
 - name: Print the individual PTFs information in catalog
   debug:

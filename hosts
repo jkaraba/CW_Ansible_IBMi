@@ -1,0 +1,42 @@
+[ibmi]
+ibmi_node1 ansible_host=10.150.31.109
+ibmi_node2 ansible_host=10.150.110.246
+
+[ibmi:vars]
+#ansible_user=QCIUSER
+ansible_ssh_user=QSECOFR
+#ansible_ssh_pass=passw0rd
+ansible_python_interpreter="/QOpensys/pkgs/bin/python3"
+
+[ibmi_cloud]
+ibmi_cloud_node ansible_host=169.47.177.68
+
+[ibmi_cloud:vars]
+ansible_ssh_user=QSECOFR
+ansible_ssh_pass=secofr
+ansible_python_interpreter="/QOpensys/pkgs/bin/python3"
+
+[aix]
+fg-target-AIX72TL2SP1   ansible_host=10.150.31.29
+jk-nim-master   ansible_host=10.150.31.54
+jk-aix-node1    ansible_host=10.150.31.120
+jk-aix-node2    ansible_host=10.150.31.112
+
+[nim]
+jk-nim-master   ansible_ssh_host=10.150.31.54
+
+[ansible]
+jk-ansible-ctl  ansible_host=10.150.105.3
+
+[rhel]
+jk-rhel-node1   ansible_host=10.150.31.148
+
+[powervc]
+powervc143  ansible_host=10.150.254.46
+#powervc144 ansible_host=10.150.31.50
+powervc20   ansible_host=10.150.31.100
+
+#[all:vars]
+#ansible_user=root
+#ansible_connection=ssh
+

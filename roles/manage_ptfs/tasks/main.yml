@@ -1,39 +1,44 @@
 ---
-# tasks file for manage_ptfs
-#- name: Include fix_repo_check_download_individual_ptfs role to check and download a list of individual ptfs
-#  include_role: 
-#    name: fix_repo_check_download_individual_ptfs
-#  ignore_errors: true
 
 - name: Check system for PTFs  
   include_tasks: query_system_for_ptfs.yml
-  
-#- name: Find matching PTFs  
-#  set_fact:
-#     matching_ptfs: "{{ matching_ptfs | combine({item.PTF_IDENTIFIER: { 'PTF_INFO': item }}, recursive = true) }}"
-#  loop: "{{ loaded_ptfs }}"
-#  loop_control:
-#    label: "{{ item.PTF_IDENTIFIER }}"
-#  when: item.PTF_IDENTIFIER in ptfs_list   
 
-#- set_fact:
-#    matching_ptfs: "{{ matching_ptfs | combine({item: { 'PTF_INFO': loaded_ptfs[idx] }}, recursive = true) }}"
-#  vars:
-
-- debug: var=loaded_ptfs
-- debug: var=ptfs_list
-
-- debug:
-    msg: "{{ loaded_ptfs | ansible.utils.index_of('eq', item) }}"
+- name: Match requested PTFs against PTF list
+  set_fact:
+    matching_ptfs: "{{ matching_ptfs | combine({item: loaded_ptfs[idx |int] }, recursive = true) }}"
+  vars:
+     idx: "{{ lookup('ansible.utils.index_of', loaded_ptfs, 'eq', item, 'PTF_IDENTIFIER') }}"
   loop: "{{ ptfs_list }}"
+  when: idx != []
 
-
-- name: Show details for matching PTFs  
+- name: "Found {{ matching_ptfs |length }} matching PTF(s)"  
   include_tasks: show_ptf_details.yml
   vars:
-    product: "{{ item.PTF_PRODUCT_ID }}"
-    ptf: "{{ item.PTF_IDENTIFIER }}"
-    release: "{{ PTF_PRODUCT_RELEASE_LEVEL }}" 
+    product: "{{ item.value.PTF_PRODUCT_ID }}"
+    ptf: "{{ item.value.PTF_IDENTIFIER }}"
+    release: "*ALL"
   loop: "{{ matching_ptfs |dict2items }}"
+  loop_control:
+     label: "{{ item.value.PTF_IDENTIFIER }}"
+
+################################################
+- name: Check if individual PTFs are already in catalog
+  ibm.power_ibmi.ibmi_fix_repo:
+    type: "single_ptf"
+    action: "find"
+    parameters: "{{ ptfs_list |string }}"
+    checksum: true
+  register: fix_repo_find_result
+  delegate_to: "{{ repo_server }}"
+
+
+
+#- name: Download missing PTFs
+#  include_role: 
+#    name: fix_repo_download_apply_individual_ptfs
+#  ignore_errors: True
+#  loop: "{{ query('sequence', 'start=1 end=5') }}"
+#  loop_control:
+#    loop_var: sequence_var
 
 

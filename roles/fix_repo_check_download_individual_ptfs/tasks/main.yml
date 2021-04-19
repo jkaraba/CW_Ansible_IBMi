@@ -69,7 +69,7 @@
         #   debug:
         #     var: check_fail_list
 
-        # - name: Print be downloaded ptfs list
+        # - name: Print the downloaded ptfs list
         #   debug:
         #     var: RecordNotFound_list
 

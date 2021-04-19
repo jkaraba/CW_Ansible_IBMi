@@ -1,5 +1,5 @@
 ---
-- name: deleting user profile(s)
+- name: delete user profile(s)
   ibm.power_ibmi.ibmi_user_and_group:
     operation: 'delete'
     user: "{{ item.name }}"

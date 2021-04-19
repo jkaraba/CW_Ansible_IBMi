@@ -4,3 +4,4 @@ ptf_action: 'list'
 repo_server: '{{ inventory_hostname }}'
 ptfs_list_parm: "{{ ptfs_list }}"
 matching_ptfs: {}
+final_ptfs_status: {}
