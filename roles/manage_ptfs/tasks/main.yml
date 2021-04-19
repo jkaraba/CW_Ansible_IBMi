@@ -16,10 +16,11 @@
 #    label: "{{ item.PTF_IDENTIFIER }}"
 #  when: item.PTF_IDENTIFIER in ptfs_list   
 
-- set_fact:
-    matching_ptfs: "{{ matching_ptfs | combine({item: { 'PTF_INFO': loaded_ptfs[idx] }}, recursive = true) }}"
-  vars:
-    idx: "{{ loaded_ptfs | ansible.utils.index_of('eq', item) }}"
+#- set_fact:
+#    matching_ptfs: "{{ matching_ptfs | combine({item: { 'PTF_INFO': loaded_ptfs[idx] }}, recursive = true) }}"
+#  vars:
+- debug:
+    msg: "{{ loaded_ptfs | ansible.utils.index_of('eq', item) }}"
   loop: "{{ ptfs_list }}"
 
 
