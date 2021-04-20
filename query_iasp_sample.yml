@@ -10,8 +10,9 @@
 
   - name: Query the iASP existing
     ibmi_sql_query:
-      sql: "SELECT * FROM QSYS2.ASP_INFO where ASP_STATE = 'AVAILABLE' and ASP_NUMBER != 1;"
-    register: iasp_list
+#      sql: "SELECT * FROM QSYS2.ASP_INFO where ASP_STATE = 'AVAILABLE' and ASP_NUMBER != 1;"
+      sql: "SELECT * FROM QSYS2.ASP_INFO;"
+      register: iasp_list
 
   - block:
     - name: run CL command module with asp_group
