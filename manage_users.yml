@@ -1,5 +1,5 @@
 ---
-- name: Update VMs
+- name: Manage Users
   hosts: all
   gather_facts: no
    
